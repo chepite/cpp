@@ -1,0 +1,18 @@
+hangman game
+VARIABLES:
+maxtries
+name
+numberoftries
+words
+guessedletters
+
+VERLOOP PROGRAMMA	
+verwelkom de gebruiker --> naam vragen
+vraag letter -> +: letter toevoegen met boodschap / -: +1 bij pogingen
+
+?? kijken hoe half compleet woord displayen
+vars: currentletter 
+woord
+incompleteword
+position nieuwe letter
+for/foreach loop door woord gaan om letter toe te voegen
