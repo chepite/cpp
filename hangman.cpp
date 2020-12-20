@@ -12,7 +12,7 @@ const int maxtries = 5;
 
 int getRandomNumber()
 {
-   
+   //zweer welke autist eeft pseudorandom uitgevonden
     srand((int)time(0));
 	int i = 0;
     int random;
@@ -23,7 +23,6 @@ int getRandomNumber()
         
 	}
     return random;
-    
 }
 
 int main()
@@ -57,6 +56,11 @@ int main()
             cout << "\n"
                  << endl;
             cout << "Wow you are good at this!" << endl;
+            int i = guessedLetters->length();
+            guessedLetters[i] = letter;
+            cout << guessedLetters[i] << endl;
+            //get the letter and fill the word with the letter
+
         }
         else{
             cout << "\n"<< endl;
