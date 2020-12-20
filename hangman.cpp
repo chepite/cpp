@@ -7,7 +7,7 @@
 using namespace std;
 
 const int maxtries = 5;
-
+string guessingword = "";
 int getRandomNumber()
 {
     //zweer welke autist eeft pseudorandom uitgevonden
@@ -21,6 +21,26 @@ int getRandomNumber()
         cout << r << " ";
     }
     return random;
+}
+
+string fillWord(string chosenword, char letter)
+{
+    //ervoor zorgen dat de woorden alsje ze gokt samengevoegd worden nu wordt enkel getoond waar de ingevoerde letter staat de vorige worden niet weergegeven
+    // ==> strings mergen
+    for (int i = 0; i < chosenword.length(); i++)
+    {
+        if (chosenword[i] == letter)
+        {
+            chosenword[i] = letter;
+            guessingword = chosenword;
+        }
+        else
+        {
+            chosenword[i] = '_';
+            guessingword = chosenword;
+        }
+    }
+    return guessingword;
 }
 
 int main()
@@ -48,12 +68,16 @@ int main()
              << endl;
         cout << "kies een letter: " << endl;
         cin >> letter;
+        //cout << typeid(letter).name()<< endl;
         //cout << chosenword.find(letter) << endl;
+        string str1 = typeid(letter).name();
+
         if (chosenword.find(letter) < chosenword.length())
         {
             cout << "\n"
                  << endl;
             cout << "Wow you are good at this!" << endl;
+            cout << fillWord(chosenword, letter) << endl;
             int i = guessedLetters->length();
             guessedLetters[i] = letter;
             cout << guessedLetters[i] << endl;
