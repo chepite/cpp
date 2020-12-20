@@ -6,29 +6,26 @@
 #include <ctime>
 using namespace std;
 
-
 const int maxtries = 5;
-
 
 int getRandomNumber()
 {
-   
+    //zweer welke autist eeft pseudorandom uitgevonden
     srand((int)time(0));
-	int i = 0;
+    int i = 0;
     int random;
-	while(i++ < 1) {
-		int r = (rand() % 5) ;
+    while (i++ < 1)
+    {
+        int r = (rand() % 5);
         random = r;
-		cout << r << " ";
-        
-	}
+        cout << r << " ";
+    }
     return random;
-    
 }
 
 int main()
 {
-    
+
     string name;
     int numberOfTries;
     string words[] =
@@ -52,15 +49,21 @@ int main()
         cout << "kies een letter: " << endl;
         cin >> letter;
         //cout << chosenword.find(letter) << endl;
-        if (chosenword.find(letter)< chosenword.length())
+        if (chosenword.find(letter) < chosenword.length())
         {
             cout << "\n"
                  << endl;
             cout << "Wow you are good at this!" << endl;
+            int i = guessedLetters->length();
+            guessedLetters[i] = letter;
+            cout << guessedLetters[i] << endl;
+            //get the letter and fill the word with the letter
         }
-        else{
-            cout << "\n"<< endl;
-            cout << "Wrong, nerd"<< endl;
+        else
+        {
+            cout << "\n"
+                 << endl;
+            cout << "Wrong, nerd" << endl;
             numberOfTries++;
         }
     }
