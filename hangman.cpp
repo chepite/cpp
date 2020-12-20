@@ -7,7 +7,7 @@
 using namespace std;
 
 const int maxtries = 5;
-string guessingword = "";
+string guessingword = {};
 int getRandomNumber()
 {
     //zweer welke autist eeft pseudorandom uitgevonden
@@ -23,21 +23,37 @@ int getRandomNumber()
     return random;
 }
 
-string fillWord(string chosenword, char letter)
+string fillWord(string chosenword, char letter, string oldguess)
 {
     //ervoor zorgen dat de woorden alsje ze gokt samengevoegd worden nu wordt enkel getoond waar de ingevoerde letter staat de vorige worden niet weergegeven
     // ==> strings mergen
+    //fix strings
+
+    if (oldguess == "")
+    {
+        for (int i = 0; i < chosenword.length(); i++)
+        {
+            oldguess[i] = '_';
+        }
+    }
+    cout << "TEST: "
+         << "-->" << oldguess << "<--" << endl;
     for (int i = 0; i < chosenword.length(); i++)
     {
         if (chosenword[i] == letter)
         {
-            chosenword[i] = letter;
-            guessingword = chosenword;
+            guessingword[i] = letter;
+
+            //guessingword = chosenword;
         }
-        else
+    }
+    cout << "TEST: "
+         << "-->" << guessingword << "<--" << endl;
+    for (int i = 0; i < chosenword.length(); i++)
+    {
+        if (guessingword[i] != oldguess[i])
         {
-            chosenword[i] = '_';
-            guessingword = chosenword;
+            guessingword[i] = oldguess[i];
         }
     }
     return guessingword;
@@ -68,8 +84,7 @@ int main()
              << endl;
         cout << "kies een letter: " << endl;
         cin >> letter;
-        //cout << typeid(letter).name()<< endl;
-        //cout << chosenword.find(letter) << endl;
+
         string str1 = typeid(letter).name();
 
         if (chosenword.find(letter) < chosenword.length())
@@ -77,11 +92,8 @@ int main()
             cout << "\n"
                  << endl;
             cout << "Wow you are good at this!" << endl;
-            cout << fillWord(chosenword, letter) << endl;
-            int i = guessedLetters->length();
-            guessedLetters[i] = letter;
-            cout << guessedLetters[i] << endl;
-            //get the letter and fill the word with the letter
+            string answer = fillWord(chosenword, letter, guessingword);
+            cout << answer << endl;
         }
         else
         {
