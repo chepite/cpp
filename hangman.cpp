@@ -7,7 +7,8 @@
 using namespace std;
 
 const int maxtries = 5;
-string guessingword = {};
+string guessingword = "";
+bool won = false;
 int getRandomNumber()
 {
     //zweer welke autist eeft pseudorandom uitgevonden
@@ -23,47 +24,72 @@ int getRandomNumber()
     return random;
 }
 
+bool checkwin(string chosenword)
+{
+    if (guessingword == chosenword)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
 string fillWord(string chosenword, char letter, string oldguess)
 {
     //ervoor zorgen dat de woorden alsje ze gokt samengevoegd worden nu wordt enkel getoond waar de ingevoerde letter staat de vorige worden niet weergegeven
     // ==> strings mergen
     //fix strings
 
-    if (oldguess == "")
+    if (oldguess == "" && guessingword == "")
     {
         for (int i = 0; i < chosenword.length(); i++)
         {
-            oldguess[i] = '_';
+            oldguess.push_back('_');
+            guessingword.push_back('_');
         }
     }
-    cout << "TEST: "
-         << "-->" << oldguess << "<--" << endl;
+
     for (int i = 0; i < chosenword.length(); i++)
     {
         if (chosenword[i] == letter)
         {
-            guessingword[i] = letter;
 
+            guessingword[i] = letter;
+            //cout << guessingword << endl;
             //guessingword = chosenword;
         }
     }
-    cout << "TEST: "
-         << "-->" << guessingword << "<--" << endl;
-    for (int i = 0; i < chosenword.length(); i++)
+
+    //zorgt ervoor dat de nieuwe letters en oude gokwoord samen worden gevoegd
+    if (oldguess != guessingword)
     {
-        if (guessingword[i] != oldguess[i])
+        for (int i = 0; i < chosenword.length(); i++)
         {
-            guessingword[i] = oldguess[i];
+            if (guessingword[i] == '_' && oldguess[i] != '_')
+            {
+                guessingword[i] = oldguess[i];
+            }
         }
     }
-    return guessingword;
+
+    if (checkwin(chosenword) == false)
+    {
+        return guessingword;
+    }
+    else
+    {
+        return guessingword;
+        won = true;
+    }
 }
 
 int main()
 {
 
     string name;
-    int numberOfTries;
+    int numberOfTries = 0;
     string words[] =
         {"appel", "auto", "school", "opa", "corona", "quarantaine"};
     string guessedLetters[] = {};
@@ -76,7 +102,8 @@ int main()
     cout << chosenword << endl;
 
     //zolang als true is game niet over
-    while (numberOfTries < maxtries)
+    cout << won << endl;
+    while (numberOfTries < maxtries || won == true)
     {
 
         char letter;
