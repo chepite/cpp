@@ -24,17 +24,7 @@ int getRandomNumber()
     return random;
 }
 
-bool checkwin(string chosenword)
-{
-    if (guessingword == chosenword)
-    {
-        return true;
-    }
-    else
-    {
-        return false;
-    }
-}
+
 
 string fillWord(string chosenword, char letter, string oldguess)
 {
@@ -74,15 +64,9 @@ string fillWord(string chosenword, char letter, string oldguess)
         }
     }
 
-    if (checkwin(chosenword) == false)
-    {
+    
         return guessingword;
-    }
-    else
-    {
-        return guessingword;
-        won = true;
-    }
+    
 }
 
 int main()
@@ -103,7 +87,7 @@ int main()
 
     //zolang als true is game niet over
     cout << won << endl;
-    while (numberOfTries < maxtries || won == true)
+    while (numberOfTries < maxtries || guessingword != chosenword)
     {
 
         char letter;
@@ -120,6 +104,7 @@ int main()
                  << endl;
             cout << "Wow you are good at this!" << endl;
             string answer = fillWord(chosenword, letter, guessingword);
+            guessingword = answer;
             cout << answer << endl;
         }
         else
