@@ -24,8 +24,6 @@ int getRandomNumber()
     return random;
 }
 
-
-
 string fillWord(string chosenword, char letter, string oldguess)
 {
     //ervoor zorgen dat de woorden alsje ze gokt samengevoegd worden nu wordt enkel getoond waar de ingevoerde letter staat de vorige worden niet weergegeven
@@ -64,9 +62,7 @@ string fillWord(string chosenword, char letter, string oldguess)
         }
     }
 
-    
-        return guessingword;
-    
+    return guessingword;
 }
 
 int main()
@@ -87,32 +83,38 @@ int main()
 
     //zolang als true is game niet over
     cout << won << endl;
-    while (numberOfTries < maxtries || guessingword != chosenword)
+    while (numberOfTries < maxtries)
     {
-
-        char letter;
-        cout << "\n"
-             << endl;
-        cout << "kies een letter: " << endl;
-        cin >> letter;
-
-        string str1 = typeid(letter).name();
-
-        if (chosenword.find(letter) < chosenword.length())
+        if (guessingword != chosenword)
         {
+            char letter;
             cout << "\n"
                  << endl;
-            cout << "Wow you are good at this!" << endl;
-            string answer = fillWord(chosenword, letter, guessingword);
-            guessingword = answer;
-            cout << answer << endl;
+            cout << "kies een letter: " << endl;
+            cin >> letter;
+
+            string str1 = typeid(letter).name();
+
+            if (chosenword.find(letter) < chosenword.length())
+            {
+                cout << "\n"
+                     << endl;
+                cout << "Wow you are good at this!" << endl;
+                string answer = fillWord(chosenword, letter, guessingword);
+                guessingword = answer;
+                cout << answer << endl;
+            }
+            else
+            {
+                cout << "\n"
+                     << endl;
+                cout << "Wrong, nerd" << endl;
+                numberOfTries++;
+            }
         }
         else
         {
-            cout << "\n"
-                 << endl;
-            cout << "Wrong, nerd" << endl;
-            numberOfTries++;
+            break;
         }
     }
 
